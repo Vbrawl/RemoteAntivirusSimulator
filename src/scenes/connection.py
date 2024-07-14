@@ -11,7 +11,7 @@ class Connection(Scene):
         process_handle = screen.processing(len(messages), "Connecting through cable")
 
         for i in process_handle:
-            for _ in range(random.randint(1, 10)):
+            for _ in range(random.randint(1, 3)):
                 time.sleep(1)
                 process_handle.refresh(0)
             process_handle.clear()
