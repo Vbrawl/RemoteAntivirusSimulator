@@ -28,4 +28,4 @@ class Screen:
         print(self.success_color, '[+]', *args, **kwargs)
 
     def processing(self, steps: int = PROGRESS_MAX, description: str = ""):
-        return tqdm(range(steps), desc=self.processing_color + description, leave=False)
+        return tqdm(total=steps, desc=self.processing_color + description, leave=False)
