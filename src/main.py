@@ -12,13 +12,16 @@ if __name__ == "__main__":
 
     scan_modes = {
         "Quick Scan": {
-            "MalwareScan": {},
+            "MalwareScan": {
+                "initial_path": "/"
+            },
             "GeneratingReport": {
                 "filepath": "QuickScanReport.docx"
             }
         },
         "Full Scan": {
             "MalwareScan": {
+                "initial_path": "/",
                 "execution_time": 8 * 60,
                 "scan_multiplier": 0.05,
                 "maximum_scan_duration": 10,
