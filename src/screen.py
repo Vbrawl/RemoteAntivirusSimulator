@@ -24,7 +24,7 @@ class Screen:
         selection = self.input_int(valid_selections, ": ")
         while selection is None:
             print(f"{Fore.RED}Only an integer between {valid_selections.start} and {valid_selections.stop}"
-                  " are valid!{Fore.GREEN}")
+                  f" are valid!{Fore.GREEN}")
             selection = self.input_int(valid_selections, ": ")
         return selection
 
