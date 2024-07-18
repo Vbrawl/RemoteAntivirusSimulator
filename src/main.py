@@ -22,9 +22,13 @@ if __name__ == "__main__":
     mode_index = screen.menu("Remote Antivirus", list(map(lambda x: x[0], scan_modes)))
     mode: tuple[str, dict[str, Any], dict[str, Any]] = scan_modes[mode_index]
 
-    plot = Plot([
-        Preparing(mode[0]),
-        Connection(),
-        MalwareScan(**mode[1])
-    ])
-    plot.runAll(screen)
+    # noinspection PyBroadException
+    try:
+        plot = Plot([
+            Preparing(mode[0]),
+            Connection(),
+            MalwareScan(**mode[1])
+        ])
+        plot.runAll(screen)
+    except Exception:
+        screen.error("An unexpected error happened!")
