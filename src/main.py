@@ -14,7 +14,7 @@ if __name__ == "__main__":
         "Quick Scan": {
             "MalwareScan": {},
             "GeneratingReport": {
-                "filepath": "Report.docx"
+                "filepath": "QuickScanReport.docx"
             }
         },
         "Full Scan": {
@@ -25,7 +25,7 @@ if __name__ == "__main__":
                 "minimum_scan_duration": 0.05
             },
             "GeneratingReport": {
-                "filepath": "Report.docx"
+                "filepath": "FullScanReport.docx"
             }
         }
     }
@@ -44,3 +44,6 @@ if __name__ == "__main__":
         plot.runAll(screen)
     except Exception as e:
         screen.error("An unexpected error happened!")
+    screen.success("Scan completed!")
+    screen.log("Press <Enter> to quit")
+    input()
