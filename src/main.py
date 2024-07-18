@@ -4,31 +4,43 @@ from plot import Plot
 from scenes.preparing import Preparing
 from scenes.connection import Connection
 from scenes.malware_scan import MalwareScan
+from scenes.generating_report import GeneratingReport
 
 
 if __name__ == "__main__":
     screen = Screen()
 
-    # The dictionary holds parameters for the MalwareScan
-    scan_modes:list[tuple[str, dict[str, Any]]] = [
-        ("Quick Scan", {}),
-        ("Full Scan", {
-            "execution_time": 8 * 60,
-            "scan_multiplier": 0.05,
-            "maximum_scan_duration": 10,
-            "minimum_scan_duration": 0.05
-        })
-    ]
-    mode_index = screen.menu("Remote Antivirus", list(map(lambda x: x[0], scan_modes)))
-    mode: tuple[str, dict[str, Any], dict[str, Any]] = scan_modes[mode_index]
+    scan_modes = {
+        "Quick Scan": {
+            "MalwareScan": {},
+            "GeneratingReport": {
+                "filepath": "Report.docx"
+            }
+        },
+        "Full Scan": {
+            "MalwareScan": {
+                "execution_time": 8 * 60,
+                "scan_multiplier": 0.05,
+                "maximum_scan_duration": 10,
+                "minimum_scan_duration": 0.05
+            },
+            "GeneratingReport": {
+                "filepath": "Report.docx"
+            }
+        }
+    }
+
+    mode_index = screen.menu("Remote Antivirus", list(scan_modes.keys()))
+    mode = scan_modes[mode_index]
 
     # noinspection PyBroadException
     try:
         plot = Plot([
-            Preparing(mode[0]),
+            Preparing(mode_index),
             Connection(),
-            MalwareScan(**mode[1])
+            MalwareScan(**(mode["MalwareScan"])),
+            GeneratingReport(**(mode["GeneratingReport"]))
         ])
         plot.runAll(screen)
-    except Exception:
+    except Exception as e:
         screen.error("An unexpected error happened!")

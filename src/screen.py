@@ -26,7 +26,7 @@ class Screen:
             print(f"{Fore.RED}Only an integer between {valid_selections.start} and {valid_selections.stop}"
                   f" are valid!{Fore.GREEN}")
             selection = self.input_int(valid_selections, ": ")
-        return selection
+        return entries[selection]
 
     @staticmethod
     def input_int(valid_range: range, prompt: str = '') -> int | None:
