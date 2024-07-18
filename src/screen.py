@@ -14,6 +14,31 @@ class Screen:
         self.success_color = success_color
         self.processing_color = processing_color
 
+    def menu(self, title: str, entries: list[str] = None):
+        print(Fore.RED + title, Fore.RESET)
+        for i, entry in enumerate(entries):
+            print(f'{Fore.GREEN}{i}.{Fore.RESET}{entry}')
+        print(Fore.GREEN + "Please select an entry")
+
+        valid_selections = range(0, len(entries))
+        selection = self.input_int(valid_selections, ": ")
+        while selection is None:
+            print(f"{Fore.RED}Only an integer between {valid_selections.start} and {valid_selections.stop}"
+                  " are valid!{Fore.GREEN}")
+            selection = self.input_int(valid_selections, ": ")
+        return selection
+
+    @staticmethod
+    def input_int(valid_range: range, prompt: str = '') -> int | None:
+        selection = input(prompt)
+        if not selection.isnumeric():
+            return None
+
+        selection = int(selection)
+        if selection not in valid_range:
+            return None
+        return selection
+
     @staticmethod
     def log(*args, **kwargs):
         print(Fore.RESET, *args, **kwargs)
