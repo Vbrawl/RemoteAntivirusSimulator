@@ -1,6 +1,7 @@
 from typing import Any
 from screen import Screen
 from plot import Plot
+from scenes.preparing import Preparing
 from scenes.connection import Connection
 from scenes.malware_scan import MalwareScan
 
@@ -22,6 +23,7 @@ if __name__ == "__main__":
     mode: tuple[str, dict[str, Any], dict[str, Any]] = scan_modes[mode_index]
 
     plot = Plot([
+        Preparing(mode[0]),
         Connection(),
         MalwareScan(**mode[1])
     ])
