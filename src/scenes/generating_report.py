@@ -17,7 +17,7 @@ class GeneratingReport(Scene):
 
         delay = random.randint(10, 30)
         waiting = 0
-        processing_handle = screen.processing(100)
+        processing_handle = screen.processing(100, "Generating Report")
         while delay > waiting:
             step = random.randint(2, 5)
             time.sleep(step)
